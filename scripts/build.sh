@@ -41,10 +41,10 @@ done
 shift $((OPTIND -1))
 
 # Make sure dependencies are installed
-command -v jsonnet >/dev/null 2>&1 || { echo >&2 "I require jsonnet but it's not installed.  Aborting."; exit 1; }
-command -v jb >/dev/null 2>&1 || { echo >&2 "I require jsonnet-bundler but it's not installed.  Aborting."; exit 1; }
-command -v gojsontoyaml >/dev/null 2>&1 || { echo >&2 "I require gojsontoyaml but it's not installed.  Aborting."; exit 1; }
-command -v parallel >/dev/null 2>&1 || { echo >&2 "I require parallel but it's not installed.  Aborting."; exit 1; }
+for CMD in "jsonnet" "jb" "gojsontoyaml" "parallel"
+do
+  command -v $CMD >/dev/null 2>&1 || { echo >&2 "🚨 I require $CMD but it's not installed. 🚨 Aborting. 🚨"; exit 1; }
+done
 
 DEFAULT_DIRECTORIES=( "clusters" )
 DIRECTORIES=${@:-"${DEFAULT_DIRECTORIES}"}

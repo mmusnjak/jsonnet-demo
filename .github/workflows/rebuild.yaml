@@ -1,7 +1,11 @@
 name: rebuild-manifests
-on: [push]
+on: 
+  push:
+    branches-ignore:
+      - validated
 jobs:
   rebuild-manifests:
+    name: Rebuild and validate manifests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -23,3 +27,7 @@ jobs:
         run: |
           scripts/build.sh
           scripts/check-dirty.sh
+      - name: Push to release branch
+        if: ${{ github.ref_name == 'main' }}
+        run: |
+          echo "TODO: Push changes to 'validated' branch."
