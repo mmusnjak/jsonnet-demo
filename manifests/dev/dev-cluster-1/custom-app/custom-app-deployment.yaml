@@ -19,3 +19,5 @@ spec:
       containers:
       - image: image.io/appImage:1.0.0
         name: custom-app
+      - image: image.io/sidecar:2.0.0
+        name: sidecar

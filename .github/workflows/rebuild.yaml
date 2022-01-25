@@ -1,0 +1,25 @@
+name: rebuild-manifests
+on: [push]
+jobs:
+  rebuild-manifests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: kobtea/setup-jsonnet-action@v1
+      - uses: actions/setup-go@v2
+        with:
+          go-version: '^1.17.6' # The Go version to download (if necessary) and use.     
+      - name: Cache vendored libraries
+        uses: actions/cache@v2
+        with:
+          path: |
+            vendor
+          key: ${{ runner.os }}-${{ hashFiles('jsonnetfile.lock.json') }}      
+      - name: Install dependencies
+        run: |
+          jb install
+          go install github.com/brancz/gojsontoyaml@latest
+      - name: Regenerate and validate manifests
+        run: |
+          scripts/build.sh
+          scripts/check-dirty.sh
