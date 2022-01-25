@@ -1,0 +1,14 @@
+#!/bin/bash
+
+source ./scripts/colors.sh
+
+# Reinstall hooks whenever someone does 'git pull' and the hooks directory changed
+if test $(git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD \
+    | grep "^scripts/git-hooks/" \
+    | wc -l) != 0
+then
+    green
+    echo "Reinstalling git hooks..."
+    reset
+    ./scripts/setup_hooks.sh
+fi

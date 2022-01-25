@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: custom-app
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      labelKey: labelValue
+      name: custom-app
+  template:
+    metadata:
+      labels:
+        labelKey: labelValue
+        name: custom-app
+    spec:
+      containers:
+      - image: image.io/appImage:1.0.0
+        name: custom-app

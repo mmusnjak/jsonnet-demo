@@ -1,0 +1,14 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: GitRepository
+metadata:
+  name: gitRepo
+  namespace: custom-app
+spec:
+  gitImplementation: libgit2
+  interval: 1m0s
+  ref:
+    branch: main
+  secretRef:
+    name: custom-app
+  timeout: 30s
+  url: https://github.com/mmusnjak/...

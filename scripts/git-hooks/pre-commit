@@ -1,0 +1,33 @@
+#!/bin/bash
+
+PATH=$PATH:/usr/local/bin/
+source ./scripts/colors.sh
+
+if [[ -f BUILD_IS_BROKEN ]] ; then
+    echo Current build is broken, refusing to commit.
+    exit 1
+fi
+
+folder="manifests/"
+rm -rf ${folder}/*
+
+./scripts/build.sh clusters
+
+if test $(git status --porcelain -- "${folder}" | grep "^.\w" | wc -l) != 0
+then
+    red
+    echo "The work tree in the ${folder} folder is dirty after rebuild:"
+    echo
+    yellow
+    bold
+    git status --porcelain -- "${folder}" | grep "^.\w"
+    reset
+    echo
+    git status "${folder}"
+    exit 1
+else
+    green
+    echo "The work tree in the ${folder} folder is clean after rebuild"
+    reset
+    exit 0
+fi
