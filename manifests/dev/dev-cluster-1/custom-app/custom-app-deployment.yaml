@@ -4,6 +4,7 @@ metadata:
   annotations:
     lastMinute: very much so
   name: custom-app
+  namespace: custom-app
 spec:
   replicas: 1
   selector:

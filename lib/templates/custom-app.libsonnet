@@ -18,15 +18,17 @@
         },
 
         // Hidden deployment object, as we want to be able to modify it before materializing
-        deployment:: libraries.k.apps.v1.deployment.new(
-            name="custom-app",
-            replicas=params.replicas,
-            containers=[
-                k.core.v1.container.new("custom-app", "image.io/appImage:1.0.0"),
-                k.core.v1.container.new("sidecar", "image.io/sidecar:2.0.0"),
-            ],
-            podLabels={ labelKey: "labelValue" }
-        ),
+        deployment::
+            libraries.k.apps.v1.deployment.new(
+                name="custom-app",
+                replicas=params.replicas,
+                containers=[
+                    k.core.v1.container.new("custom-app", "image.io/appImage:1.0.0"),
+                    k.core.v1.container.new("sidecar", "image.io/sidecar:2.0.0"),
+                ],
+                podLabels={ labelKey: "labelValue" }
+            ) +
+            libraries.k.apps.v1.deployment.metadata.withNamespace(env.namespace),
 
         gitRepository:: (
             local gitRepo = flux.source.v1beta1.gitRepository;
