@@ -1,0 +1,12 @@
+{
+    "jsonnet.libPaths": [
+        "${workspaceFolder}/lib",
+        "${workspaceFolder}/vendor"
+    ],
+    "jsonnet.fmtOptions": "--indent 4 --string-style d --comment-style s",
+    "cSpell.words": [
+        "Jsonnet",
+        "libsonnet"
+    ],
+    "editor.formatOnSave": true
+}

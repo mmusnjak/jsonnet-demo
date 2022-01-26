@@ -12,13 +12,38 @@ You'll need to install the following:
 * [go](https://go.dev/): `brew install go`
 * [gojsontoyaml](https://github.com/brancz/gojsontoyaml): `go install github.com/brancz/gojsontoyaml@latest`
 * [GNU Parallel](https://www.gnu.org/software/parallel/): `brew install parallel`
+* [Jsonnet NG](https://marketplace.visualstudio.com/items?itemName=Sebbia.jsonnetng): VSCode extension for Jsonnet
 
 ## Downloading dependencies
 
 Jsonnet-bundler is used to download the dependencies to the `vendor` directory.
+You need to do this once before being able to build the manifests.
 
 ```bash
 jb install
+```
+
+Later, you'll also need to do it if the remote repository has updated the dependencies.
+You can update dependencies yourself by running `jb update`.
+Make sure to rebuild the manifests after that to confirm no unwanted changes were caused.
+
+## Building the output manifests
+
+You can run the [scripts/build.sh](scripts/build.sh) script to regenerate the output manifests.
+This will format all jsonnet and libsonnet files in the clusters and lib directories, and then save the rendered manifests to the manifests directory.
+
+You can call that script with one or more directories or jsonnet files to avoid rebuilding all the manifests.
+If called with a directory, it will process all jsonnet files in that directory and all its children.
+
+```bash
+# Builds all the clusters in dev environment:
+scripts/build.sh clusters/dev
+
+# Builds all the manifests for dev-cluster-1:
+scripts/build.sh clusters/dev/dev-cluster-1 
+
+# Builds all the manifests for dev-cluster-1 and for prod-cluster-1:
+scripts/build.sh clusters/dev/dev-cluster-1 clusters/prod/prod-cluster-1
 ```
 
 ## Project structure
@@ -30,13 +55,6 @@ jb install
 * [manifests](manifests): rendered manifests ready to be applied to the clusters. The internal directory structure replicates the structure of the [clusters](clusters) directory
 * [vendor](vendor): the downloaded external dependencies used. The contents are controlled by [jsonnetfile.json](jsonnetfile.json) and the corresponding lock file, and managed by the jsonnet-bundler tool
 * [scripts](scripts): various scripts, including pre-commit checks and the build script
-
-## Building the output manifests
-
-You can run the [scripts/build.sh](scripts/build.sh) script to regenerate the output manifests.
-This will format all jsonnet and libsonnet files in the clusters and lib directories, and then save the rendered manifests to the manifests directory.
-
-You can call that script with one or more directories or jsonnet files to avoid rebuilding all the manifests. If called with a directory, it will process all jsonnet files in that directory and all its children.
 
 ## Learning more
 
