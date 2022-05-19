@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - id: setup-jsonnet
-        uses: zendesk/setup-jsonnet@v1
+        uses: zendesk/setup-jsonnet@v10
         with:
           version: v0.18.0
       - uses: actions/setup-go@v2
