@@ -1,11 +1,12 @@
 {
-    customApp(libraries, env, appParams):: {
+    customApp(env, appParams):: {
         // Make sure we have all the libraries we need
         // We could also be asserting all the APIs we require are available in the libraries
-        assert std.objectHas(libraries, "k") : "Libraries should include field 'k' with the k8s library",
-        assert std.objectHas(libraries, "flux") : "Libraries should include field 'k' with the fluxCD library",
-        local k = libraries.k,
-        local flux = libraries.flux,
+        assert std.objectHas(env, "libraries") : "Environment should contain a library object",
+        assert std.objectHas(env.libraries, "k") : "Libraries should include field 'k' with the k8s library",
+        assert std.objectHas(env.libraries, "flux") : "Libraries should include field 'k' with the fluxCD library",
+        local k = env.libraries.k,
+        local flux = env.libraries.flux,
 
         // Allows us to refer to the root object of the template later
         local this = self,
@@ -19,7 +20,7 @@
 
         // Hidden deployment object, as we want to be able to modify it before materializing
         deployment::
-            libraries.k.apps.v1.deployment.new(
+            env.libraries.k.apps.v1.deployment.new(
                 name="custom-app",
                 replicas=params.replicas,
                 containers=[
@@ -28,7 +29,7 @@
                 ],
                 podLabels={ labelKey: "labelValue" }
             ) +
-            libraries.k.apps.v1.deployment.metadata.withNamespace(env.namespace),
+            env.libraries.k.apps.v1.deployment.metadata.withNamespace(env.namespace),
 
         gitRepository:: (
             local gitRepo = flux.source.v1beta1.gitRepository;

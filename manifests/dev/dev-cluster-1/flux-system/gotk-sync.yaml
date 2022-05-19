@@ -1,0 +1,22 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: GitRepository
+metadata:
+  name: dev-cluster-1
+  namespace: flux-system
+spec:
+  gitImplementation: libgit2
+  ignore: |
+    # exclude all
+    /*
+    # include deploy dir
+    !/manifests/dev/dev-cluster-1
+    # exclude non-Kubernetes YAMLs
+    /manifests/**/kustomize.yaml
+    /manifests/**/kustomization.yaml
+  interval: 3m1s
+  ref:
+    branch: validated
+  secretRef:
+    name: flux-system
+  timeout: 30s
+  url: https://hostname/kube-manifests
