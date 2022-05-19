@@ -17,7 +17,7 @@ function buildCommandFromFile() {
     mkdir -p manifests/${PATH} ; 
     mkdir -p manifests/${PATH}/setup ; 
     jsonnet --jpath lib --jpath vendor --multi manifests/${PATH} ${FILE} | \
-        grep -v .out$ | \
+        grep -v .ignore$ | \
         xargs -I{} sh -c 'cat {} | gojsontoyaml > {}.yaml' -- {}
   "
 }
@@ -41,7 +41,7 @@ done
 shift $((OPTIND -1))
 
 # Make sure dependencies are installed
-for CMD in "jsonnet" "jb" "gojsontoyaml" "parallel"
+for CMD in "jsonnet" "jb" "gojsontoyaml" "parallel" "jsonnetfmt"
 do
   command -v $CMD >/dev/null 2>&1 || { echo >&2 "🚨 I require $CMD but it's not installed. 🚨 Aborting. 🚨"; exit 1; }
 done

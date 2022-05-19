@@ -55,11 +55,11 @@
       "source": {
         "git": {
           "remote": "https://github.com/jsonnet-libs/fluxcd-libsonnet.git",
-          "subdir": "0.25.3"
+          "subdir": "0.28.5"
         }
       },
-      "version": "08a13208d10d598e2d0bd9389428128b932864b3",
-      "sum": "khm1NKqlCKu3don8unEvde9XOzUINaNQm3Hl8dXKFo8="
+      "version": "c49ba29065c0aa96b97380a7050f8f40c110c5a1",
+      "sum": "IPwPLkVi+grj+zUOF0KsHGJAD09/fGLFTf4c9WaZ6lo="
     },
     {
       "source": {

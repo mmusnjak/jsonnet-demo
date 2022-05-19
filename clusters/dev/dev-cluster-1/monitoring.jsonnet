@@ -12,6 +12,13 @@ local kp =
             common+: {
                 namespace: "monitoring",
             },
+            alertmanager+: {
+                replicas: 2,
+            },
+            prometheus+: {
+                replicas: 4,
+                namespaces+: ["foo"],
+            },
         },
     };
 
