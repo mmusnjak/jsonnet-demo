@@ -24,8 +24,9 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('jsonnetfile.lock.json') }}
       - name: Install dependencies
         run: |
-          jb install
+          go install -a github.com/jsonnet-bundler/jsonnet-bundler/cmd/jb@latest
           go install github.com/brancz/gojsontoyaml@latest
+          jb install
       - name: Regenerate and validate manifests
         run: |
           scripts/build.sh
