@@ -3,15 +3,22 @@
 PATH=$PATH:/usr/local/bin/
 source ./scripts/colors.sh
 
-if [[ -f BUILD_IS_BROKEN ]] ; then
-    echo Current build is broken, refusing to commit.
-    exit 1
-fi
+function validate_build() {
+    if [[ -f BUILD_IS_BROKEN ]] ; then
+        red
+        echo Current build is broken, refusing to commit.
+        exit 1
+    fi
+}
+
+validate_build
 
 folder="manifests/"
 rm -rf ${folder}/*
 
 ./scripts/build.sh clusters
+
+validate_build
 
 if test $(git status --porcelain -- "${folder}" | grep "^.\w" | wc -l) != 0
 then
