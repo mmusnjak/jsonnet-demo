@@ -1,0 +1,14 @@
+(import "../env.libsonnet") {
+    clusterName: "dev-cluster-1",
+
+    // Choose the libraries that we will be using for the apps in this cluster.
+    // Different clusters might be running on different Kubernetes (or other dependency) versions,
+    // so we can pass in the libraries that correspond to the cluster we're building this for.
+    // You can override this on namespace level as well.
+    libraries: {
+        k: (import "vendor/github.com/jsonnet-libs/k8s-libsonnet/1.23/main.libsonnet"),
+        flux: (import "vendor/github.com/jsonnet-libs/fluxcd-libsonnet/0.28.5/main.libsonnet"),
+        prom: (import "vendor/github.com/jsonnet-libs/kube-prometheus-libsonnet/0.10/main.libsonnet"),
+        utils: (import "lib/utils.libsonnet"),
+    },
+}

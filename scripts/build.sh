@@ -16,7 +16,8 @@ function buildCommandFromFile() {
     rm -fr manifests/${PATH} ; 
     mkdir -p manifests/${PATH} ; 
     mkdir -p manifests/${PATH}/setup ; 
-    jsonnet --jpath lib --jpath vendor --multi manifests/${PATH} ${FILE} | \
+    # Added . for transition period. TODO: Cleanup
+    jsonnet --jpath lib --jpath vendor --jpath . --multi manifests/${PATH} ${FILE} | \ 
         grep -v .ignore$ | \
         xargs -I{} sh -c 'cat {} | gojsontoyaml > {}.yaml' -- {}
   "
