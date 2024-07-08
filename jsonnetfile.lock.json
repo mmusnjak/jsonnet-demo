@@ -58,28 +58,28 @@
           "subdir": "grafana-builder"
         }
       },
-      "version": "33d0c06eadc2558b339903771425c26b4e157919",
-      "sum": "5ku1Hd8UPnjmn8nWyaTFzMpT3Pa+VylBnmposMSVEuU="
+      "version": "3640ab808e80521b00dfec54efb322c95e5cdf09",
+      "sum": "EEPwMLfUIJT9iEUI/gCW9x6PxWoTBPSJOfabTF4rp1M="
     },
     {
       "source": {
         "git": {
           "remote": "https://github.com/jsonnet-libs/fluxcd-libsonnet.git",
-          "subdir": "2.2.2"
+          "subdir": "2.3.0"
         }
       },
-      "version": "ac70d483b7224785064694cb4baac761203e3059",
-      "sum": "LWvUGot54/+NEfSaZSbxyo5hQRIm2EhafQMT18mmvx0="
+      "version": "000ed73dfc9966c780ae9b62eb97fc52f6a7f8e0",
+      "sum": "/7WCgrDymrCAdwktFijoumWuk2j0FgjWXCYtPCPAOZg="
     },
     {
       "source": {
         "git": {
           "remote": "https://github.com/jsonnet-libs/k8s-libsonnet.git",
-          "subdir": "1.29"
+          "subdir": "1.30"
         }
       },
-      "version": "bf9a62cfd32a58c071b8410bfcdec058475dd25e",
-      "sum": "i2w3hGbgQmaB73t5LJHSioPOVdYv8ZBvivHiDwZJVyI="
+      "version": "6ecbb7709baf27f44b2e48f3529741ae6754ae6a",
+      "sum": "0OMrWr4xnhN5VWLXwPzCmdcENsifLNAZNzPvrHAnUAo="
     },
     {
       "source": {
@@ -170,7 +170,7 @@
           "subdir": "docs/node-mixin"
         }
       },
-      "version": "cadb1d1190ad95c66b951758f01ff4c94e55e6ce",
+      "version": "4cc1c177d05e80176f26fe1ca2a1f193c03c67a0",
       "sum": "R9ROsvpjZLgQJ78WAyD4HzrIq976Bpr4V2P2Fo2Kfns="
     },
     {
